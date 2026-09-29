@@ -6,3 +6,5 @@
 @media print{#person-dialog{display:none}}
 
 #trip-map{height:420px;border:1px solid var(--line);border-radius:10px;background:#e5eadd;isolation:isolate;z-index:0}.map-fallback{padding:25px}.trip-pin{display:grid;place-items:center;background:var(--ink);color:white;border:3px solid white;border-radius:50% 50% 50% 5px;box-shadow:0 2px 8px #0004;font:700 16px 'DM Sans',sans-serif}.trip-pin.hotel{background:var(--orange)}.place-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.map-focus{background:transparent;border:1px solid var(--ink);border-radius:6px;padding:10px 15px;font-size:14px;color:var(--ink)}.leaflet-popup-content{font:14px/1.5 'DM Sans',sans-serif}.leaflet-popup-content strong{font-size:16px}.leaflet-popup-content a{color:var(--ink);font-weight:700}@media(max-width:700px){#trip-map{height:340px}}@media print{#trip-map,#map-status,.map-focus{display:none}}
+
+.trip-pin.provisional{border-style:dashed;background:#526443}.trip-pin.market-place{background:#75432d}

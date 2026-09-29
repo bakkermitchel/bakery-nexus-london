@@ -16,3 +16,4 @@
 .group-hero{margin:30px 0 0}.hero-scroll{border-radius:10px;overflow:hidden;background:var(--ink)}.hero-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}.hero-scroll img{display:block;width:100%;height:auto}#person-dialog.breed{width:min(96vw,1400px)}
 @media(max-width:700px){.group-hero{margin:22px -20px 0}.hero-scroll{border-radius:0}}
 @media print{.group-hero{display:none}}
+.rooms{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}.rooms li{background:#f4f5ef;border-radius:6px;padding:9px 12px;font-weight:700;font-size:14px;line-height:1.35}.rooms li span{color:var(--orange);font-weight:400}@media(max-width:420px){.rooms{grid-template-columns:1fr}}

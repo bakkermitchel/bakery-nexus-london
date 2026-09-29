@@ -119,7 +119,7 @@ function cameo(){const vak=document.getElementById('london-photo');if(!cameos.le
 let n=0;try{n=(+localStorage.getItem('nexusCameoVolgende')||0)%cameos.length;localStorage.setItem('nexusCameoVolgende',n+1)}catch(e){}
 const c=cameos[n],p=people.find(x=>x.id===c.id);if(!p||!p.afbeelding)return;
 const el=document.createElement('a');el.className='photo-cameo';el.href='#groep';el.setAttribute('aria-label',`${fullName(p)}: ${c.titel} Bekijk de groep`);
-el.innerHTML=`<img src="${p.afbeelding}-480.webp" alt="">${c.ring?`<svg class="cameo-ring" style="left:${c.ring[0]}%;top:${c.ring[1]}%" viewBox="0 0 100 120" aria-hidden="true"><path d="M45 32 Q16 57 45 82"/><path d="M26 19 Q-12 57 26 95"/></svg>`:''}<span>${esc(c.titel)}</span>`;
+el.innerHTML=`<img src="${p.afbeelding}-480.webp" alt="">${c.ring?`<svg class="cameo-ring" style="left:${c.ring[0]}%;top:${c.ring[1]}%" viewBox="0 0 100 120" aria-hidden="true"><path d="M45 32 Q16 57 45 82"/><path d="M26 19 Q-12 57 26 95"/></svg>`:''}`;
 const img=el.querySelector('img');img.onload=()=>{vak.append(el);requestAnimationFrame(()=>el.classList.add('in'))}}
 setTimeout(cameo,new URLSearchParams(location.search).has('cameo')?300:1500);
 window.addEventListener('hashchange',()=>{render();view.scrollIntoView({behavior:'smooth',block:'start'})});render();

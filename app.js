@@ -56,7 +56,7 @@ function group(){const done=people.filter(p=>p.afbeelding).length;view.innerHTML
 const dlg=document.getElementById('person-dialog');view.querySelectorAll('[data-person]').forEach(b=>b.onclick=()=>{const p=people.find(x=>x.id===b.dataset.person);const img=document.getElementById('pd-img');img.src=p.afbeelding+'.webp';img.alt=p.alt;document.getElementById('pd-title').textContent=fullName(p);dlg.showModal()});
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()})}
 // Inspiratieboek: foto's en notities centraal in Supabase, afgeschermd met één groepscode.
-const IDEE_API='https://rpbiwpjkaysxyhfrbljl.supabase.co/functions/v1/inspiratie',IDEE_KEY='sb_publishable_9IxzTaZfDP2fIS3Rgptxuw_9B_6tu2T';
+const IDEE_API='https://rpbiwpjkaysxyhfrbljl.supabase.co/functions/v1/hyper-function',IDEE_KEY='sb_publishable_9IxzTaZfDP2fIS3Rgptxuw_9B_6tu2T';
 const categorieen=['Product','Smaakinspiratie','Verpakking','Interieur','Concept','Overig'];
 const opslag={lees(k){try{return localStorage.getItem(k)||''}catch(e){return''}},zet(k,v){try{v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch(e){}}};
 let ideeen=null,ideeFilter='Alle',ideeBeheer=false;

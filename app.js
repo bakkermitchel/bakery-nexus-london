@@ -112,4 +112,17 @@ document.getElementById('id-meta').textContent=[i.categorie,i.locatie,new Date(i
 document.getElementById('id-title').textContent=i.titel;document.getElementById('id-door').innerHTML=`${avatar(i.door)}${esc(i.door)}`;document.getElementById('id-note').textContent=i.notitie||'';scoreBlok(i);del.hidden=!ideeBeheer;
 del.onclick=async()=>{if(!confirm(`“${i.titel}” definitief verwijderen?`))return;try{await ideeApi({actie:'verwijder',id:i.id});dlg.close();ideeen=ideeen.filter(x=>x.id!==i.id);toonIdeeen()}catch(err){alert(err.message)}};if(!dlg.open)dlg.showModal()}
 function render(){if(placesMap){placesMap.remove();placesMap=null;}const route=/^#ik=/.test(location.hash)?'inspiratie':location.hash.slice(1)||'programma';document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+route;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});({programma:program,groep:group,challenges,plekken:places,inspiratie:inspiration,praktisch:practical}[route]||program)()}
+// Cameo: af en toe schuift een deelnemer rechtsonder in beeld. Eén keer per bezoek, telkens de volgende uit de lijst.
+// ring = [links, boven] in % van de afbeelding, voor rinkelstreepjes bij een telefoon (optioneel).
+const cameos=[{id:'nick-eversdijk',titel:'Nick rondt nog even een belletje af…',sub:'Jij kunt alvast Londen ontdekken.',ring:[23,24]}];
+function cameo(forceer){if(!cameos.length||document.querySelector('dialog[open]')||/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName))return;
+let n=0;try{n=(+localStorage.getItem('nexusCameoVolgende')||0)%cameos.length;localStorage.setItem('nexusCameoVolgende',n+1)}catch(e){}
+const c=cameos[n],p=people.find(x=>x.id===c.id);if(!p||!p.afbeelding)return;
+const el=document.createElement('div');el.className='cameo';el.setAttribute('role','complementary');el.setAttribute('aria-label',`Groet van ${p.voornaam}`);
+el.innerHTML=`<div class="cameo-img"><button class="cameo-close" aria-label="Sluiten">✕</button><img src="${p.afbeelding}-480.webp" alt="${esc(p.alt)}">${c.ring?`<svg class="cameo-ring" style="left:${c.ring[0]}%;top:${c.ring[1]}%" viewBox="0 0 100 120" aria-hidden="true"><path d="M45 32 Q16 57 45 82"/><path d="M26 19 Q-12 57 26 95"/></svg>`:''}</div><div class="cameo-copy"><b>${esc(c.titel)}</b><small>${esc(c.sub)}</small></div><div class="cameo-bar"></div>`;
+document.body.append(el);let t;const weg=()=>{clearTimeout(t);el.classList.add('weg');setTimeout(()=>el.remove(),350)};
+el.querySelector('.cameo-close').onclick=weg;el.addEventListener('mouseenter',()=>{clearTimeout(t);el.classList.add('pauze')});el.addEventListener('mouseleave',()=>{el.classList.remove('pauze');t=setTimeout(weg,1500)});
+t=setTimeout(weg,forceer?8000:5000)}
+{let al='';try{al=sessionStorage.getItem('nexusCameo')}catch(e){}const forceer=new URLSearchParams(location.search).has('cameo');
+if(forceer||!al){try{sessionStorage.setItem('nexusCameo','1')}catch(e){}setTimeout(()=>cameo(forceer),forceer?1200:4000)}}
 window.addEventListener('hashchange',()=>{render();view.scrollIntoView({behavior:'smooth',block:'start'})});render();

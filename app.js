@@ -26,26 +26,26 @@ function practical(){view.innerHTML=`<div class="section-head"><h2>Goed geregeld
 // Deelnemers — centrale lijst. Afbeelding alleen invullen als de illustratie goedgekeurd is.
 // Interne briefings staan bewust NIET hier (deze file is openbaar), maar in data/participants-private.json buiten dist.
 const people=[
-['david-van-maanen','David','Van Maanen',true],
+['david-van-maanen','David','Van Maanen',true,'assets/people/david-van-maanen',null,'Cartoon van David die bij Borough Market een vlog opneemt met zijn telefoon en trots een ingesneden zuurdesembrood laat zien.'],
 ['nick-eversdijk','Nick','Eversdijk',true,'assets/people/nick-eversdijk','https://bakerynexus.nl/wp-content/uploads/2023/12/Nick.jpeg','Cartoon van Nick die in Londen twee telefoongesprekken tegelijk voert: een smartphone aan zijn oor en de hoorn van een rode telefooncel in zijn andere hand, met Big Ben op de achtergrond.'],
 ['lieke-schoenmakers','Lieke','Schoenmakers',true,'assets/people/lieke-schoenmakers','https://bakerynexus.nl/wp-content/uploads/2026/05/Lieke-Schoenmakers.png','Cartoon van Lieke in trenchcoat en luipaardblouse, met een Engelse kop thee en een croissant, voor Big Ben en een rode telefooncel.'],
-['mitchel-ammerlaan','Mitchel','Ammerlaan',true],
-['jarno-ammerlaan','Jarno','Ammerlaan'],
-['bas-post','Bas','Post'],
-['jeroen-heemskerk','Jeroen','Heemskerk'],
-['richard-huisman','Richard','Huisman'],
-['robin-kruikenmeier','Robin','Kruikenmeier'],
-['jeroen-hutten','Jeroen','Hutten'],
-['maria-luis-brandao','Maria Luis','Brandáo'],
-['india-soeteman','India','Soeteman'],
-['kelly-van-de-kletersteeg','Kelly','van de Kletersteeg'],
-['maurits-casteleijn','Maurits','Casteleijn'],
-['wout-nollen','Wout','Nollen'],
-['anke-daling','Anke','Daling'],
+['mitchel-ammerlaan','Mitchel','Ammerlaan',true,'assets/people/mitchel-ammerlaan',null,'Cartoon van Mitchel die als een dirigent een Londense bakkerij leidt, met een productielijst in de ene hand en een stokbrood als dirigeerstok in de andere.'],
+['jarno-ammerlaan','Jarno','Ammerlaan',false,'assets/people/jarno-ammerlaan',null,'Cartoon van Jarno die room spuit op een piepkleine Tower Bridge-taart, met een Londense etalage en rode telefooncel op de achtergrond.'],
+['bas-post','Bas','Post',false,'assets/people/bas-post',null,'Cartoon van Bas die als grondstoffenverkoper een schepje meel aanprijst als een Londense schat, naast een zadenbrood en een monsterkoffer.'],
+['jeroen-heemskerk','Jeroen','Heemskerk',false,'assets/people/jeroen-heemskerk',null,'Cartoon van Jeroen Heemskerk die op een Londens terras met een reuzenrekenmachine de kostprijs van een croissant uitrekent.'],
+['richard-huisman','Richard','Huisman',false,'assets/people/richard-huisman',null,'Cartoon van Richard die met een enorme spuitzak petitfours afwerkt, waarvan er één op een rode Londense bus lijkt.'],
+['robin-kruikenmeier','Robin','Kruikenmeier',false,'assets/people/robin-kruikenmeier',null,'Cartoon van Robin met zonnebril die een reusachtig taartpunt presenteert aan een Londense high-tea-toonbank.'],
+['jeroen-hutten','Jeroen','Hutten',false,'assets/people/jeroen-hutten',null,'Cartoon van Jeroen Hutten die een nieuw spiraalgebakje met een vergrootglas bestudeert als een uitvinding.'],
+['maria-luis-brandao','Maria Luis','Brandáo',false,'assets/people/maria-luis-brandao',null,'Cartoon van Maria die in een Londens café een croissant fotografeert en een lampje bijstelt, met een rode bus op de achtergrond.'],
+['india-soeteman','India','Soeteman',false,'assets/people/india-soeteman',null,'Cartoon van India met een overborrelende pot zuurdesemstarter en een deegschraper, naast een mooi ingesneden brood bij Borough Market.'],
+['kelly-van-de-kletersteeg','Kelly','van de Kletersteeg',false,'assets/people/kelly-van-de-kletersteeg',null,'Cartoon van Kelly die trots een grote spiraalkneder demonstreert in een Londense bakkerij.'],
+['maurits-casteleijn','Maurits','Casteleijn',false,'assets/people/maurits-casteleijn',null,'Cartoon van Maurits die een monsterkoffer vol minibroodjes en potjes grondstoffen opent alsof het juwelen zijn.'],
+['wout-nollen','Wout','Nollen',false,'assets/people/wout-nollen',null,'Cartoon van Wout die een vol blik verse broden balanceert en ondertussen een productielijst afvinkt.'],
+['anke-daling','Anke','Daling',false,'assets/people/anke-daling',null,'Cartoon van Anke die in een Londens café lachend wijst naar een stijgende grafiek van croissants op haar laptop.'],
 ['emilie-tolhuisen','Emilie','Tolhuisen'],
-['rico-romijn','Rico','Romijn'],
-['jim-van-aken','Jim','van Aken'],
-['anne-van-kraaij','Anne','van Kraaij']
+['rico-romijn','Rico','Romijn',false,'assets/people/rico-romijn',null,'Cartoon van Rico die als testbakker een flinterdun vliesje deeg uitrekt, met proefbroodjes en een weegschaal op de werkbank.'],
+['jim-van-aken','Jim','van Aken',false,'assets/people/jim-van-aken',null,'Cartoon van Jim die onder een zilveren stolp een overdadig luxe brood onthult.'],
+['anne-van-kraaij','Anne','van Kraaij',false,'assets/people/anne-van-kraaij',null,'Cartoon van Anne die met een liniaaltje een croissant precies op zijn plek legt in een winkelpresentatie.']
 ].map(([id,voornaam,achternaam,projectgroep=false,afbeelding=null,bronfoto=null,alt=''])=>({id,voornaam,achternaam,projectgroep,afbeelding,bronfoto,alt}));
 const fullName=p=>`${p.voornaam} ${p.achternaam}`;
 const initials=p=>(p.voornaam[0]+p.achternaam.split(' ').filter(w=>!/^(van|de|der|den)$/.test(w)).pop()[0]).toUpperCase();

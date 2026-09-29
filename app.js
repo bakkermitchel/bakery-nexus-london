@@ -112,7 +112,7 @@ document.getElementById('id-meta').textContent=[i.categorie,i.locatie,new Date(i
 document.getElementById('id-title').textContent=i.titel;document.getElementById('id-door').innerHTML=`${avatar(i.door)}${esc(i.door)}`;document.getElementById('id-note').textContent=i.notitie||'';scoreBlok(i);del.hidden=!ideeBeheer;
 del.onclick=async()=>{if(!confirm(`“${i.titel}” definitief verwijderen?`))return;try{await ideeApi({actie:'verwijder',id:i.id});dlg.close();ideeen=ideeen.filter(x=>x.id!==i.id);toonIdeeen()}catch(err){alert(err.message)}};if(!dlg.open)dlg.showModal()}
 function render(){if(placesMap){placesMap.remove();placesMap=null;}const route=/^#ik=/.test(location.hash)?'inspiratie':location.hash.slice(1)||'programma';document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+route;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});({programma:program,groep:group,challenges,plekken:places,inspiratie:inspiration,praktisch:practical}[route]||program)()}
-// Cameo: bij elk bezoek schuift de volgende deelnemer in het fotovak bovenaan. Testen: ?cameo (sneller, altijd).
+// Cameo: bij elk bezoek staat de volgende deelnemer in het fotovak bovenaan, zonder overgang; alleen de figuur zelf beweegt.
 // ring = [links, boven] in % van de afbeelding, voor rinkelstreepjes bij een telefoon (optioneel).
 const cameos=[{id:'nick-eversdijk',titel:'Nick rondt nog even een belletje af…',ring:[23,24]}];
 function cameo(){const vak=document.getElementById('london-photo');if(!cameos.length||!vak)return;
@@ -120,6 +120,6 @@ let n=0;try{n=(+localStorage.getItem('nexusCameoVolgende')||0)%cameos.length;loc
 const c=cameos[n],p=people.find(x=>x.id===c.id);if(!p||!p.afbeelding)return;
 const el=document.createElement('a');el.className='photo-cameo';el.href='#groep';el.setAttribute('aria-label',`${fullName(p)}: ${c.titel} Bekijk de groep`);
 el.innerHTML=`<img src="${p.afbeelding}-480.webp" alt="">${c.ring?`<svg class="cameo-ring" style="left:${c.ring[0]}%;top:${c.ring[1]}%" viewBox="0 0 100 120" aria-hidden="true"><path d="M45 32 Q16 57 45 82"/><path d="M26 19 Q-12 57 26 95"/></svg>`:''}`;
-const img=el.querySelector('img');img.onload=()=>{vak.append(el);requestAnimationFrame(()=>el.classList.add('in'))}}
-setTimeout(cameo,new URLSearchParams(location.search).has('cameo')?300:1500);
+const img=el.querySelector('img');img.onload=()=>vak.append(el)}
+cameo();
 window.addEventListener('hashchange',()=>{render();view.scrollIntoView({behavior:'smooth',block:'start'})});render();

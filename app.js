@@ -133,6 +133,24 @@ view.querySelectorAll('[data-stem]').forEach(b=>b.onclick=async()=>{const i=chDa
 if(vorig===i.id){i.stemmen--;delete chData.mijn[i.challenge]}else{const v=chData.inzendingen.find(x=>x.id===vorig);if(v)v.stemmen--;i.stemmen++;chData.mijn[i.challenge]=i.id}toonChallenges();
 try{await ideeApi({actie:'stem',id:i.id})}catch(err){alert(`Je stem is niet opgeslagen: ${err.message}`);laadChallenges()}});
 view.querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Deze foto definitief verwijderen?'))return;try{await ideeApi({actie:'verwijder-inzending',id:b.dataset.weg});chData.inzendingen=chData.inzendingen.filter(x=>x.id!==b.dataset.weg);toonChallenges()}catch(err){alert(err.message)}})}
-function render(){if(placesMap){placesMap.remove();placesMap=null;}const route=/^#ik=/.test(location.hash)?'inspiratie':location.hash.slice(1)||'programma';document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+route;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});({programma:program,groep:group,challenges,plekken:places,inspiratie:inspiration,praktisch:practical}[route]||program)()}
+// Wachtkamer: tot het verzamelen op Schiphol (vr 2 okt 07:00 NL-tijd) alleen header, countdown en beginscherm-uitleg.
+// Organisatie: ?open zet de site op dit toestel open, ?dicht zet de wachtkamer terug.
+const OPEN_OM=Date.UTC(2026,9,2,5,0,0);
+{const q=new URLSearchParams(location.search);if(q.has('open'))opslag.zet('nexusOpen','1');if(q.has('dicht'))opslag.zet('nexusOpen','')}
+const gesloten=()=>Date.now()<OPEN_OM&&!opslag.lees('nexusOpen');
+let aftelTimer=null;
+function wachtkamer(){document.body.classList.add('gesloten');const naam=opslag.lees('nexusNaam'),sleutel=opslag.lees('nexusSleutel'),ios=/iPhone|iPad|iPod/.test(navigator.userAgent),opScherm=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
+const iphone=`<article class="card stap"><h3>iPhone</h3><ol><li>Open deze link in <strong>Safari</strong>. Zit je in WhatsApp? Tik dan op <strong>Openen in Safari</strong> (het kompasje).</li><li>Tik op <strong>Deel</strong>: het vierkantje met het pijltje omhoog.</li><li>Kies <strong>Zet op beginscherm</strong> en tik op <strong>Voeg toe</strong>.</li></ol></article>`,
+android=`<article class="card stap"><h3>Android</h3><ol><li>Open deze link in <strong>Chrome</strong>.</li><li>Tik rechtsboven op <strong>⋮</strong> (drie puntjes).</li><li>Kies <strong>Toevoegen aan startscherm</strong> of <strong>App installeren</strong>.</li></ol></article>`;
+view.innerHTML=`<section class="aftel"><p class="eyebrow">VERZAMELEN OP SCHIPHOL PLAZA · VRIJDAG 2 OKTOBER · 07:00</p><div class="aftel-klok" role="timer" aria-live="off">${['dagen','uur','min','sec'].map(e=>`<div><strong data-teller="${e}">00</strong><span>${e}</span></div>`).join('')}</div>
+${sleutel?`<p class="aftel-hoi" id="aftel-hoi">${naam?`Hoi ${esc(naam.split(' ')[0])}! Dit is jouw persoonlijke link. Deel hem niet door, dan weet de site altijd dat jij het bent.`:'Even kijken wie je bent…'}</p>`:''}
+<p class="aftel-tekst">Vrijdag gaat hier je reisgids open: het programma, de groep, de plekken, ideeën en challenges. Zet hem nu alvast op je beginscherm, dan heb je hem in Londen met één tik bij de hand. Ook zonder internet.</p></section>
+<div class="section-head"><h2>Zet hem op je beginscherm.</h2>${opScherm?'<span class="muted">Staat er al op ✓</span>':''}</div><div class="cards">${ios?iphone+android:android+iphone}</div>`;
+const zet=()=>{let r=Math.max(0,OPEN_OM-Date.now());if(r===0){clearInterval(aftelTimer);aftelTimer=null;document.body.classList.remove('gesloten');return render()}
+const d=Math.floor(r/864e5),u=Math.floor(r/36e5)%24,m=Math.floor(r/6e4)%60,sec=Math.floor(r/1e3)%60;
+[['dagen',d],['uur',u],['min',m],['sec',sec]].forEach(([k,v])=>{const el=view.querySelector(`[data-teller="${k}"]`);if(el)el.textContent=String(v).padStart(2,'0')})};
+zet();clearInterval(aftelTimer);aftelTimer=setInterval(zet,1000);
+if(sleutel&&!naam)ideeApi({actie:'controle'}).then(d=>{if(d.naam){opslag.zet('nexusNaam',d.naam);const h=document.getElementById('aftel-hoi');if(h)h.textContent=`Hoi ${d.naam.split(' ')[0]}! Dit is jouw persoonlijke link. Deel hem niet door, dan weet de site altijd dat jij het bent.`}}).catch(()=>{const h=document.getElementById('aftel-hoi');if(h)h.remove()})}
+function render(){if(placesMap){placesMap.remove();placesMap=null;}if(gesloten())return wachtkamer();const route=/^#ik=/.test(location.hash)?'inspiratie':location.hash.slice(1)||'programma';document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+route;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});({programma:program,groep:group,challenges,plekken:places,inspiratie:inspiration,praktisch:practical}[route]||program)()}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 window.addEventListener('hashchange',()=>{render();view.scrollIntoView({behavior:'smooth',block:'start'})});render();

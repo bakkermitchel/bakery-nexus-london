@@ -28,3 +28,4 @@ body.gesloten aside nav,body.gesloten .aside-foot,body.gesloten footer{display:n
 @media(max-width:700px){.tour-plek summary{padding:14px;gap:10px}.tour-plek .tag{font-size:11px}}
 .trip-pin.zondag{background:#fff;color:var(--ink);border-color:var(--ink);font-size:12px}.tour-nr.zondag{background:#fff;border:2px solid var(--ink);font-size:13px}
 .rooms li small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.aftel-welkom{font-family:Anton,'Space Grotesk',sans-serif;font-weight:400;letter-spacing:.3px;font-size:clamp(40px,8vw,72px);line-height:1;margin:0 0 14px;color:var(--ink)}.aftel-hoi{font-weight:400;font-size:15px;color:var(--muted)}

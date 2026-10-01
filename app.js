@@ -6,12 +6,12 @@ function program(){view.innerHTML=`<div class="section-head"><h2>Jouw weekend.</
 
 const tripPlaces=[
 {id:'hotel',name:'The Prince Hotel Vauxhall Central London Riverside',label:'Hotel',when:'Ons verblijf · 2–4 oktober',address:'49–51 Black Prince Road, Londen, SE11 6AB',coords:[51.49133,-0.11824],query:'49-51 Black Prince Road, London SE11 6AB',phone:'+447784603675'},
-{id:'pier',name:'Embankment Pier',label:'Boot',when:'Zaterdag · 14:45 aanwezig',address:'Victoria Embankment, Londen',note:'Vertrek 15:00 · vaart tot 15:45',coords:[51.507306,-0.121194],query:'Embankment Pier London'},
 {id:'coca-cola',buitenKaart:true,name:'Coca-Cola',label:'CC',when:'Vrijdag · 11:00',address:'Cray Road, Sidcup DA14 5DF',coords:[51.4160742,0.1175609],query:'Cray Rd, Sidcup DA14 5DF, United Kingdom'},
-{id:'bread-ahead',name:'Bread Ahead · Borough Market',label:'BA',when:'Zaterdag · 10:00',address:'Borough Market, Cathedral Street, Londen SE1 9DE',coords:[51.5060102,-0.090434],query:'Bread Ahead Borough Market Cathedral Street London',source:'https://www.breadahead.com/borough'},
-{id:'dusty-knuckle',buitenKaart:true,name:'The Dusty Knuckle · Dalston',label:'DK',when:'Zondag · ontbijt 10:00–11:30',address:'Abbot Street Car Park, Londen E8 3DP',coords:[51.5471,-0.07415],query:'The Dusty Knuckle Abbot Street London E8 3DP',source:'https://www.thedustyknuckle.com/dalston-cafe'},
 {id:'market-place',name:'Market Place Food Hall Vauxhall',label:'MP',when:'Vrijdag · diner · 19:30',address:'7–11 South Lambeth Road, Londen SW8 1SP',coords:[51.48557,-0.12287],query:'Market Place Food Hall Vauxhall 7-11 South Lambeth Road London SW8 1SP',source:'https://www.marketplacefoodhall.com/locations/vauxhall'},
-{id:'pizza-pilgrims',name:'Pizza Pilgrims Victoria',label:'PP',when:'Zaterdag · diner · 19:30',address:'32–34 Buckingham Palace Road, Londen SW1W 0QP',coords:[51.4973062,-0.1446368],query:'Pizza Pilgrims 32-34 Buckingham Palace Road London SW1W 0QP'}
+{id:'bread-ahead',name:'Bread Ahead · Borough Market',label:'BA',when:'Zaterdag · 10:00',address:'Borough Market, Cathedral Street, Londen SE1 9DE',coords:[51.5060102,-0.090434],query:'Bread Ahead Borough Market Cathedral Street London',source:'https://www.breadahead.com/borough'},
+{id:'pier',name:'Embankment Pier',label:'Boot',when:'Zaterdag · 14:45 aanwezig',address:'Victoria Embankment, Londen',note:'Vertrek 15:00 · vaart tot 15:45',coords:[51.507306,-0.121194],query:'Embankment Pier London'},
+{id:'pizza-pilgrims',name:'Pizza Pilgrims Victoria',label:'PP',when:'Zaterdag · diner · 19:30',address:'32–34 Buckingham Palace Road, Londen SW1W 0QP',coords:[51.4973062,-0.1446368],query:'Pizza Pilgrims 32-34 Buckingham Palace Road London SW1W 0QP'},
+{id:'dusty-knuckle',buitenKaart:true,name:'The Dusty Knuckle · Dalston',label:'DK',when:'Zondag · ontbijt 10:00–11:30',address:'Abbot Street Car Park, Londen E8 3DP',coords:[51.5471,-0.07415],query:'The Dusty Knuckle Abbot Street London E8 3DP',source:'https://www.thedustyknuckle.com/dalston-cafe'}
 ];
 // Foodtour zaterdag: van Borough Market langs de Theems naar de Southbank Centre Food Market. vast = hoort bij de route, anders optioneel.
 // Gecontroleerd 1 okt 2026 (adressen, zaterdagtijden, coördinaten uit OpenStreetMap). Gabriel's Wharf is sinds 27 sep 2026 dicht.
